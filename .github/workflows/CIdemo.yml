@@ -1,8 +1,19 @@
-name: hello-world
+name: Testing CI
 'on': push
 jobs:
-  my-job:
+  test:
+    name: Running Units Tests
     runs-on: ubuntu-latest
+    
     steps:
-      - name: my-step
-        run: echo "Hello World"
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: install
+      run: npm install
+    - name: Test
+      run: npm test
+     
+     
